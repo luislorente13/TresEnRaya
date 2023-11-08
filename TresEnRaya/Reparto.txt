@@ -1,0 +1,14 @@
+
+
+
+
+Funciones --
+    -Iniciar-Reiniciar Juego.
+        -
+        -
+        -
+    -colocar ficha.
+
+
+
+
