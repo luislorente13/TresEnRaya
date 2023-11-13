@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRES EN RAYA</title>
-    <script src="../JS/script.js"></script>
+    <link rel="stylesheet" href="estilos.css">
+    <title>Tres en Raya</title>
 </head>
 <body>
-    <!--CABECERA-->
-    <header>
-        <h1>Tres en raya</h1>
-    </header>
+    <div id="app">
+        <!-- Menú Principal -->
+        <div id="menu">
+            <h1>Tres en Raya</h1>
+            <button id="jugarBtn">Jugar Partida</button>
+            <button id="estadisticasBtn">Ver Estadísticas</button>
+        </div>
 
-    <!--CONTENIDO-->
-    <main>
-        <p id="bienvenida"></p>
-        <input type="button" value="Nueva partida">
-        <input type="button" value="Estadísticas">
-    </main>
+        <!-- Tablero de Juego -->
+        <div id="tablero" style="display: none;">
+            <!-- Celdas del tablero -->
+            <div class="casilla" data-pos="0"></div>
+            <div class="casilla" data-pos="1"></div>
+            <div class="casilla" data-pos="2"></div><br>
+            <div class="casilla" data-pos="3"></div>
+            <div class="casilla" data-pos="4"></div>
+            <div class="casilla" data-pos="5"></div><br>
+            <div class="casilla" data-pos="6"></div>
+            <div class="casilla" data-pos="7"></div>
+            <div class="casilla" data-pos="8"></div>
+        </div>
+    </div>
 
-    <!--SCRIPT-->
-	<script>
-		let usuario;
-
-		document.addEventListener("DOMContentLoaded", function() {
-
-			usuario = prompt("Introduce tu nombre de usuario:");
-			document.getElementById("bienvenida").innerHTML = "Bienvenido, " + usuario;
-		});
-	</script>
+    <script src="script.js"></script>
 </body>
 </html>
