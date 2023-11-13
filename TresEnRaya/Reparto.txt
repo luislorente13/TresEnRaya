@@ -4,7 +4,7 @@
 
 Funciones --
     -Iniciar-Reiniciar Juego.
-        -
+        -Pedir nombres
         -
         -
     -colocar ficha.
