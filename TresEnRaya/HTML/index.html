@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRES EN RAYA</title>
+    <script src="../JS/script.js"></script>
+</head>
+<body>
+    <!--CABECERA-->
+    <header>
+        <h1>Tres en raya</h1>
+    </header>
+
+    <!--CONTENIDO-->
+    <main>
+        <p id="bienvenida"></p>
+        <input type="button" value="Nueva partida">
+        <input type="button" value="Estadísticas">
+    </main>
+
+    <!--SCRIPT-->
+	<script>
+		let usuario;
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			usuario = prompt("Introduce tu nombre de usuario:");
+			document.getElementById("bienvenida").innerHTML = "Bienvenido, " + usuario;
+		});
+	</script>
+</body>
+</html>
