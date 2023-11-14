@@ -1,26 +1,62 @@
 
+PLANIFICACIÓN APLICACIÓN:
+Desarrollo del HTML y CSS:
+2.1 Formulario de Apodo:
+•	En el archivo HTML, crea un formulario para solicitar el apodo del jugador.
+•	Diseña la interfaz usando CSS para que sea atractiva y fácil de usar.
+2.2 Menú Principal:
+•	Después de ingresar el apodo, muestra un menú con botones para jugar y ver estadísticas.
+•	Utiliza CSS para mejorar el diseño.
+3. Desarrollo del JavaScript (Juego de Tres en Raya):
+3.1 Lógica del Juego:
+•	En el archivo JavaScript, comienza desarrollando la lógica del juego de Tres en Raya.
+•	Define variables para el estado del juego, como el tablero y las fichas.
+•	Implementa funciones para verificar la victoria, empate y realizar movimientos.
+3.2 Interactividad:
+•	Vincula la lógica del juego con la interfaz HTML.
+•	Maneja los eventos de clic en las casillas del tablero.
+•	Asegúrate de que el juego funcione correctamente en la interfaz.
+4. Desarrollo del Formulario y Validación:
+4.1 Validación del Formulario:
+•	Implementa la validación del formulario para asegurarte de que se ingrese un apodo.
+4.2 Menú y Transiciones:
+•	Desarrolla la funcionalidad del menú principal y las transiciones entre las pantallas.
+5. Implementación de LocalStorage y Estadísticas:
+5.1 Almacenamiento Persistente:
+•	Agrega la lógica para almacenar los datos de las partidas en LocalStorage.
+5.2 Pantalla de Estadísticas:
+•	Crea la pantalla de estadísticas que muestra los últimos 25 elementos ordenados por puntuación y fecha.
+ DIVISION DE TAREAS:
+ DIVISION DE TAREAS:
 
+- Desarrollo del HTML y CSS:
+4.2 Menú y Transiciones:
+•	Desarrolla la funcionalidad del menú principal y las transiciones entre las pantallas.
+2.2 Menú Principal:
+•	Después de ingresar el apodo, muestra un menú con botones para jugar y ver estadísticas.
+•	Utiliza CSS para mejorar el diseño.
+5.2 Pantalla de Estadísticas:
+•	Crea la pantalla de estadísticas que muestra los últimos 25 elementos ordenados por puntuación y fecha. (para implementar ahi la funcion creada)
 
+Julio.
+- 3.2 Interactividad:
+•	Vincula la lógica del juego con la interfaz HTML.
+•	Maneja los eventos de clic en las casillas del tablero.
+•	Asegúrate de que el juego funcione correctamente en la interfaz.
 
-Funciones --
-    -Iniciar-Reiniciar Juego.
-        -Pedir nombres
-        -
-        -
-    -colocar ficha.
+Alfonso.
+3. Desarrollo del JavaScript (Juego de Tres en Raya):
+3.1 Lógica del Juego:
+•	En el archivo JavaScript, comienza desarrollando la lógica del juego de Tres en Raya.
+•	Define variables para el estado del juego, como el tablero y las fichas.
+•	Implementa funciones para verificar la victoria, empate y realizar movimientos.
+        Estadísticas que muestra los últimos 25 elementos ordenados por puntuación y fecha
+Javier
+4. Desarrollo del Formulario y Validación:
+4.1 Validación del Formulario:
+•	Implementa la validación del formulario para asegurarte de que se ingrese un apodo.
+Luis.
+2.1 Formulario de Apodo:
+•	En el archivo HTML, crea un formulario para solicitar el apodo del jugador.
 
-
-1- Al arrancar la página, debe aparecer un formulario que solicite el apodo del jugador que va a usar el juego. Tras introducir el apodo, aparece un menú que muestra un botón de jugar partida o ver las estadísticas de juego. (Esto junto a la validación en js) HECHO
-
-2- Al iniciar la partida, aparecerá el tablero de 3x3 (Con el CSS tanto de esta parte y de la anterior) 
-
-3- Para la IA del juego, simplemente deberán seleccionarse casillas de forma aleatoria, comprobar que está libre (si no lo está, volver a calcular otra posición), y ocupar esa casilla con la ficha del ordenador.
-
-4- Cuando termina la partida, se indica quien ha ganado (el jugador humano o el ordenador) y se almacenan los datos de la partida, según estos datos:
-        
-    Nombre del jugador (o "PC" si ha ganado el ordenador).
-    Fecha y hora de la partida.
-    Puntos conseguidos: si el jugador ha conseguido ganar al ordenador, gana tres puntos; si empata, gana 1; si pierde, gana 0 puntos.
-
-A tener en cuenta: las fichas han de ser, únicamente, de color verdes y rojas (para quién es cada una es decisión libre)
-
+PODEMOS AGREGAR TAREAS QUE CADA PERSONA CONSIDERE QUE PUEDE HACER. LO COMENTAMOS Y LO APUNTAMOS.
