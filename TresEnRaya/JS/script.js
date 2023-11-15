@@ -60,6 +60,49 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 }
 
+// casillas
+var c1 = document.getElementById("1");
+var c2 = document.getElementById("2");
+var c3 = document.getElementById("3");
+var c4 = document.getElementById("4");
+var c5 = document.getElementById("5");
+var c6 = document.getElementById("6");
+var c7 = document.getElementById("7");
+var c8 = document.getElementById("8");
+var c9 = document.getElementById("9");
+
+// marcar casillas 
+function marcarCasilla(casilla){
+    if (casilla.textContent === "") {
+        casilla.innerHTML = "X";
+        marcaRobotin();
+        comprobarGanador();
+    } else {
+        alert("Casilla ya seleccionada");
+    }
+}
+
+// marcar IA
+function marcaRobotin() {
+    var celdas = document.querySelectorAll('td');
+    var celdasNoMarcadas = [];
+    
+    celdas.forEach(function(celda, i) {
+        if (celda.textContent === "") {
+            celdasNoMarcadas.push(i);
+        }
+    });
+
+    if (celdasNoMarcadas.length > 0) {
+        var indiceAleatorio = celdasNoMarcadas[Math.floor(Math.random() * celdasNoMarcadas.length)];
+        
+        var celdaAleatoria = celdas[indiceAleatorio];
+        celdaAleatoria.innerHTML = "O";
+    } else if (celdasNoMarcadas.length <= 0){
+        alert ("Hubo un empate");
+    }
+}
+
 // comprobar ganador
 function comprobarGanador(){
     if(c1.textContent === "X" && c2.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
