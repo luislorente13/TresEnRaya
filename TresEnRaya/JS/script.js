@@ -105,6 +105,7 @@ function marcaRobotin() {
 
 // comprobar ganador
 function comprobarGanador(){
+    // jugador gana
     if(c1.textContent === "X" && c2.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
     else if(c4.textContent === "X" && c5.textContent === "X" && c6.textContent === "X") alert("El jugador a ganado");
     else if(c7.textContent === "X" && c8.textContent === "X" && c9.textContent === "X") alert("El jugador a ganado");
@@ -114,6 +115,7 @@ function comprobarGanador(){
     else if(c1.textContent === "X" && c5.textContent === "X" && c9.textContent === "X") alert("El jugador a ganado");
     else if(c7.textContent === "X" && c5.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
 
+    // CPU gana
     else if(c4.textContent === "O" && c5.textContent === "O" && c6.textContent === "O") alert("El ordenador a ganado");
     else if(c7.textContent === "O" && c8.textContent === "O" && c9.textContent === "O") alert("El ordenador a ganado");
     else if(c1.textContent === "O" && c4.textContent === "O" && c7.textContent === "O") alert("El ordenador a ganado");
