@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
 
     // tablero
@@ -7,24 +8,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const jugarBtn = document.getElementById('jugarBtn');
     const estadisticasBtn = document.getElementById('estadisticasBtn');
 
-    jugarBtn.addEventListener('click', function () { // ejecuta la funcion 'iniciarJuego()'
+    // ejecuta la funcion 'iniciarJuego()'
+    jugarBtn.addEventListener('click', function () { 
         
         iniciarJuego();
     });
 
     // iniciarJuego()
     function iniciarJuego() {
-        // Puedes implementar aquí la lógica del juego de Tres en Raya
-        // Por ejemplo, mostrar el tablero y gestionar los clics en las casillas
+        
         tablero.style.display = 'block';
 
-        // Aquí puedes agregar más lógica según las reglas del juego
+        
     }
-
-    estadisticasBtn.addEventListener('click', function () {
-        // Lógica para ver estadísticas, si es necesario
-        console.log('Ver estadísticas');
-    });
 });
 
 // casillas
@@ -44,6 +40,7 @@ function marcarCasilla(casilla){
         casilla.innerHTML = "X";
         marcaRobotin();
         comprobarGanador();
+        
     } else {
         alert("Casilla ya seleccionada");
     }
@@ -65,6 +62,7 @@ function marcaRobotin() {
         
         var celdaAleatoria = celdas[indiceAleatorio];
         celdaAleatoria.innerHTML = "O";
+
     } else if (celdasNoMarcadas.length <= 0){
         alert ("Hubo un empate");
     }
@@ -72,6 +70,7 @@ function marcaRobotin() {
 
 // comprobar ganador
 function comprobarGanador(){
+    
     // jugador gana
     if(c1.textContent === "X" && c2.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
     else if(c4.textContent === "X" && c5.textContent === "X" && c6.textContent === "X") alert("El jugador a ganado");
