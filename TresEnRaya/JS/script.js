@@ -1,4 +1,25 @@
+
+// abrir formulario al arrancar la página
+document.addEventListener("DOMContentLoaded", function() {
+
+    window.open("formulario.html", "Tres en raya", "width=500,height=300, location=no");
+});
+  
+// validar formulario
+function validar() {
+
+    const usuario = document.getElementById("usuario").value;
+
+    if (usuario === undefined) alert("ERROR. El usuario no puede estar vacío");
+    else {
+        alert("Bienvenido, " + usuario);
+        window.close();
+    }
+}
+
+// generar tablero
 document.addEventListener('DOMContentLoaded', function () {
+
     // tablero
     const menu = document.getElementById('menu');
     const tablero = document.getElementById('tablero');
@@ -6,14 +27,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const jugarBtn = document.getElementById('jugarBtn');
     const estadisticasBtn = document.getElementById('estadisticasBtn');
 
+    // ejecuta la funcion 'iniciarJuego()'
     jugarBtn.addEventListener('click', function () { 
-        tablero.style.display = 'block';
+        
+        iniciarJuego();
     });
 
-    estadisticasBtn.addEventListener('click', function () {
-        // Lógica para ver estadísticas, si es necesario
-        console.log('Ver estadísticas');
-    });
+    // iniciarJuego()
+    function iniciarJuego() {
+        
+        tablero.style.display = 'block';
+    }
 });
 
 // casillas
@@ -30,9 +54,10 @@ var c9 = document.getElementById("9");
 // marcar casillas 
 function marcarCasilla(casilla){
     if (casilla.textContent === "") {
-        casilla.querySelector('span').innerHTML = "X";
+        casilla.innerHTML = "X";
         marcaRobotin();
         comprobarGanador();
+        
     } else {
         alert("Casilla ya seleccionada");
     }
@@ -54,6 +79,7 @@ function marcaRobotin() {
         
         var celdaAleatoria = celdas[indiceAleatorio];
         celdaAleatoria.innerHTML = "O";
+
     } else if (celdasNoMarcadas.length <= 0){
         alert ("Hubo un empate");
     }
@@ -61,6 +87,7 @@ function marcaRobotin() {
 
 // comprobar ganador
 function comprobarGanador(){
+    
     // jugador gana
     if(c1.textContent === "X" && c2.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
     else if(c4.textContent === "X" && c5.textContent === "X" && c6.textContent === "X") alert("El jugador a ganado");
