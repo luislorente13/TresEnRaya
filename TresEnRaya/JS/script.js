@@ -1,4 +1,3 @@
-
 // abrir formulario al arrancar la página
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -17,9 +16,9 @@ function validar() {
     }
 }
 
-// generar tablero
-document.addEventListener('DOMContentLoaded', function () {
+let tableroVisible = false;
 
+document.addEventListener('DOMContentLoaded', function () {
     // tablero
     const menu = document.getElementById('menu');
     const tablero = document.getElementById('tablero');
@@ -27,17 +26,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const jugarBtn = document.getElementById('jugarBtn');
     const estadisticasBtn = document.getElementById('estadisticasBtn');
 
-    // ejecuta la funcion 'iniciarJuego()'
     jugarBtn.addEventListener('click', function () { 
-        
-        iniciarJuego();
+        // Hace visible el tablero
+        tablero.style.display = 'block';
+        tableroVisible = true;
     });
 
-    // iniciarJuego()
-    function iniciarJuego() {
-        
-        tablero.style.display = 'block';
-    }
+    estadisticasBtn.addEventListener('click', function () {
+        // Hace visibles las estadisticas
+        console.log('Ver estadísticas');
+    });
 });
 
 // casillas
@@ -53,11 +51,12 @@ var c9 = document.getElementById("9");
 
 // marcar casillas 
 function marcarCasilla(casilla){
-    if (casilla.textContent === "") {
-        casilla.innerHTML = "X";
+    var celdas = casilla.querySelector('span');
+    
+    if (celdas.textContent === "") {
+        celdas.textContent = "X";
         marcaRobotin();
         comprobarGanador();
-        
     } else {
         alert("Casilla ya seleccionada");
     }
@@ -65,7 +64,7 @@ function marcarCasilla(casilla){
 
 // marcar IA
 function marcaRobotin() {
-    var celdas = document.querySelectorAll('div');
+    var celdas = document.querySelectorAll('span');
     var celdasNoMarcadas = [];
     
     celdas.forEach(function(celda, i) {
@@ -79,32 +78,67 @@ function marcaRobotin() {
         
         var celdaAleatoria = celdas[indiceAleatorio];
         celdaAleatoria.innerHTML = "O";
-
-    } else if (celdasNoMarcadas.length <= 0){
-        alert ("Hubo un empate");
     }
 }
 
 // comprobar ganador
-function comprobarGanador(){
-    
-    // jugador gana
-    if(c1.textContent === "X" && c2.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
-    else if(c4.textContent === "X" && c5.textContent === "X" && c6.textContent === "X") alert("El jugador a ganado");
-    else if(c7.textContent === "X" && c8.textContent === "X" && c9.textContent === "X") alert("El jugador a ganado");
-    else if(c1.textContent === "X" && c4.textContent === "X" && c7.textContent === "X") alert("El jugador a ganado");
-    else if(c2.textContent === "X" && c5.textContent === "X" && c8.textContent === "X") alert("El jugador a ganado");
-    else if(c3.textContent === "X" && c6.textContent === "X" && c9.textContent === "X") alert("El jugador a ganado");
-    else if(c1.textContent === "X" && c5.textContent === "X" && c9.textContent === "X") alert("El jugador a ganado");
-    else if(c7.textContent === "X" && c5.textContent === "X" && c3.textContent === "X") alert("El jugador a ganado");
+function comprobarGanador() {
+    const combinacionesGanadoras = [
+        [c1, c2, c3],
+        [c4, c5, c6],
+        [c7, c8, c9],
+        [c1, c4, c7],
+        [c2, c5, c8],
+        [c3, c6, c9],
+        [c1, c5, c9],
+        [c7, c5, c3]
+    ];
 
-    // CPU gana
-    else if(c4.textContent === "O" && c5.textContent === "O" && c6.textContent === "O") alert("El ordenador a ganado");
-    else if(c7.textContent === "O" && c8.textContent === "O" && c9.textContent === "O") alert("El ordenador a ganado");
-    else if(c1.textContent === "O" && c4.textContent === "O" && c7.textContent === "O") alert("El ordenador a ganado");
-    else if(c2.textContent === "O" && c5.textContent === "O" && c8.textContent === "O") alert("El ordenador a ganado");
-    else if(c3.textContent === "O" && c6.textContent === "O" && c9.textContent === "O") alert("El ordenador a ganado");
-    else if(c1.textContent === "O" && c5.textContent === "O" && c9.textContent === "O") alert("El ordenador a ganado");
-    else if(c7.textContent === "O" && c5.textContent === "O" && c3.textContent === "O") alert("El ordenador a ganado");
-    else if(c7.textContent === "O" && c5.textContent === "O" && c3.textContent === "O") alert("El ordenador a ganado");
+    for (const combinacion of combinacionesGanadoras) {
+        const [casilla1, casilla2, casilla3] = combinacion;
+
+        if (
+            casilla1.textContent === "X" && casilla2.textContent === "X" && casilla3.textContent === "X"
+        ) {
+            alert("El jugador gana");
+            vaciarCampos();
+            return;
+        } else if (
+            casilla1.textContent === "O" && casilla2.textContent === "O" && casilla3.textContent === "O"
+        ) {
+            alert("El ordenador gana");
+            vaciarCampos();
+            return;
+        }
+    }
+    empate();
+}
+function empate() {
+    var celdas = document.querySelectorAll('.casilla span');
+    var celdasNoMarcadas = [];
+    
+    celdas.forEach(function(celda, i) {
+        if (celda.textContent === "") {
+            celdasNoMarcadas.push(i);
+        }
+    });
+
+    if (celdasNoMarcadas.length === 0) {
+        alert("Hubo un empate");
+        vaciarCampos();
+    }
+}
+function vaciarCampos(){
+    var celdas = document.querySelectorAll('.casilla');
+    celdas.forEach(function(celda) {
+        var spanElement = celda.querySelector('span');
+        if (spanElement) {
+            spanElement.innerHTML = "";
+        }
+    });
+    if (tableroVisible) {
+        tablero.style.display = 'none';
+        tableroVisible = false;
+    }
+
 }
