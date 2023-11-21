@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/estilos.css">
-    <title>Tres en Raya</title>
+    <link rel="stylesheet" href="CSS/formulario.css">
+    <title>TRES EN RAYA</title>
 </head>
 <body>
-    <main id="app">
 
-        <section id="menu">
-            <h1>Tres en Raya</h1>
-            <button id="jugarBtn">Jugar Partida</button>
-            <button id="estadisticasBtn">Ver Estadísticas</button>
+    <main>
+        <section>
+            <h1>Formulario</h1> 
+            <form id="formulario">
+                <label for="apodo">Introduce tu apodo:</label> <br>
+                <input type="text" id="apodo" name="apodo" required> <br>
+            
+                <button type="submit">Enviar</button>
+            </form>
+            <p id="mensaje"></p>
         </section>
+        
+    </main>
 
-        <article id="tablero" style="display: none;">
-            <div class="casilla" id="1" onclick="marcarCasilla(this)"><span></span></div>
-            <div class="casilla" id="2" onclick="marcarCasilla(this)"><span></span></div>
-            <div class="casilla" id="3" onclick="marcarCasilla(this)"><span></span></div> <br>
-            <div class="casilla" id="4" onclick="marcarCasilla(this)"><span></span></div>
-            <div class="casilla" id="5" onclick="marcarCasilla(this)"><span></span></div>
-            <div class="casilla" id="6" onclick="marcarCasilla(this)"><span></span></div> <br>
-            <div class="casilla" id="7" onclick="marcarCasilla(this)"><span></span></div>
-            <div class="casilla" id="8" onclick="marcarCasilla(this)"><span></span></div>
-            <div class="casilla" id="9" onclick="marcarCasilla(this)"><span></span></div>
-        </article> <!-- Fin tablero -->
-    </main> <!-- Fin app -->
+    <script>
+		document.getElementById("formulario").addEventListener("submit", function(event) {
+			event.preventDefault();
 
-    <!-- link script -->
-    <script src="JS/script.js"></script>
+			var apodo = document.getElementById("apodo").value;
+            
+			if (!isNaN(apodo)) document.getElementById("mensaje").innerHTML = "El campo de apodo no puede empezar por número";
+			else {
+                document.getElementById("mensaje").innerHTML = "Bienvenido, " + apodo;
+                setTimeout(function() {
+                    window.location.href = "juego.html";
+                }, 1000);
+            }
+		});
+	</script>
 </body>
 </html>
