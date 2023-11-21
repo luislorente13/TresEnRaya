@@ -1,40 +1,32 @@
-// abrir formulario al arrancar la página
-document.addEventListener("DOMContentLoaded", function() {
-
-    window.open("formulario.html", "Tres en raya", "width=500,height=300, location=no");
-});
-  
-// validar formulario
-function validar() {
-
-    const usuario = document.getElementById("usuario").value;
-
-    if (usuario === undefined) alert("ERROR. El usuario no puede estar vacío");
-    else {
-        alert("Bienvenido, " + usuario);
-        window.close();
-    }
-}
-
 let tableroVisible = false;
+var puntuacionPC = localStorage.getItem('PC');
+if (!puntuacionPC) {
+    var nuevaPuntuacion = 0;
+    localStorage.setItem('PC', nuevaPuntuacion);
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     // tablero
     const menu = document.getElementById('menu');
     const tablero = document.getElementById('tablero');
+    const estadisticas = document.getElementById('estadisticas');
 
     const jugarBtn = document.getElementById('jugarBtn');
     const estadisticasBtn = document.getElementById('estadisticasBtn');
 
     jugarBtn.addEventListener('click', function () { 
         // Hace visible el tablero
+        estadisticas.style.display = 'none';
+        var estadisticas = document.getElementById('estadisticas');
         tablero.style.display = 'block';
         tableroVisible = true;
     });
 
     estadisticasBtn.addEventListener('click', function () {
         // Hace visibles las estadisticas
-        console.log('Ver estadísticas');
+        tablero.style.display = 'none';
+        estadisticas.style.display = 'block';
+        verEstadisticas();
     });
 });
 
@@ -55,6 +47,7 @@ function marcarCasilla(casilla){
     
     if (celdas.textContent === "") {
         celdas.textContent = "X";
+        celdas.style.color = "green";
         marcaRobotin();
         comprobarGanador();
     } else {
@@ -78,6 +71,7 @@ function marcaRobotin() {
         
         var celdaAleatoria = celdas[indiceAleatorio];
         celdaAleatoria.innerHTML = "O";
+        celdaAleatoria.style.color = "red";
     }
 }
 
@@ -141,4 +135,14 @@ function vaciarCampos(){
         tableroVisible = false;
     }
 
+}
+
+$(document).ready(function() {
+    $(".casilla:contains('X') span").css("color", "green");
+    $(".casilla:contains('O') span").css("color", "red");
+});
+function verEstadisticas(){
+    var estadisticas = document.getElementById('estadisticas');
+    var contenidoHTML = "PC: " + localStorage.getItem('PC') + " puntos.";
+    estadisticas.innerHTML = contenidoHTML;
 }
