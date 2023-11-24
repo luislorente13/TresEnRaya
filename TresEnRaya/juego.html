@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <title>Tres en Raya</title>
+</head>
+<body>
+    <main id="app">
+
+        <section id="menu">
+            <h1>Tres en Raya</h1>
+            <button id="jugarBtn">Jugar Partida</button>
+            <button id="estadisticasBtn">Ver Estadísticas</button>
+        </section>
+
+        <article id="tablero" style="display: none;">
+            <div class="casilla" id="1" onclick="marcarCasilla(this)"><span></span></div>
+            <div class="casilla" id="2" onclick="marcarCasilla(this)"><span></span></div>
+            <div class="casilla" id="3" onclick="marcarCasilla(this)"><span></span></div> <br>
+            <div class="casilla" id="4" onclick="marcarCasilla(this)"><span></span></div>
+            <div class="casilla" id="5" onclick="marcarCasilla(this)"><span></span></div>
+            <div class="casilla" id="6" onclick="marcarCasilla(this)"><span></span></div> <br>
+            <div class="casilla" id="7" onclick="marcarCasilla(this)"><span></span></div>
+            <div class="casilla" id="8" onclick="marcarCasilla(this)"><span></span></div>
+            <div class="casilla" id="9" onclick="marcarCasilla(this)"><span></span></div>
+        </article> <!-- Fin tablero -->
+        <article id="estadisticas" style="display: none;">
+            
+        </article>
+    </main> <!-- Fin app -->
+
+    <!-- link script -->
+    <script src="JS/script.js"></script>
+</body>
+</html>
