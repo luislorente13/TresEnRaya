@@ -208,7 +208,7 @@ function verEstadisticas() {
     elementos.forEach(elementoLocalStorage => {
       const divElement = document.createElement('div');
       divElement.innerHTML = `
-        <p>nombre: ${elementoLocalStorage.nombre}</p>
+        <p>Ganador: ${elementoLocalStorage.nombre}</p>
         <p>fecha: ${elementoLocalStorage.fecha}</p>
         <p>puntos: ${elementoLocalStorage.puntos}</p>
         <hr>
