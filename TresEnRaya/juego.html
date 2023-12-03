@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Metadatos y enlaces a hojas de estilo -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/estilos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
     <title>Tres en Raya</title>
 </head>
 <body>
+    <!-- Contenido principal -->
     <main id="app">
-
+        <!-- Menú principal del juego -->
         <section id="menu">
             <h1>Tres en Raya</h1>
             <button id="jugarBtn">Jugar Partida</button>
             <button id="estadisticasBtn">Ver Estadísticas</button>
-        </section>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+        </section>
+        <!-- Tablero del juego -->
         <article id="tablero" style="display: none;">
             <div class="casilla" id="1" onclick="marcarCasilla(this)"><span></span></div>
             <div class="casilla" id="2" onclick="marcarCasilla(this)"><span></span></div>
@@ -25,11 +32,31 @@
             <div class="casilla" id="7" onclick="marcarCasilla(this)"><span></span></div>
             <div class="casilla" id="8" onclick="marcarCasilla(this)"><span></span></div>
             <div class="casilla" id="9" onclick="marcarCasilla(this)"><span></span></div>
+             <!-- Muestra el nombre del jugador aquí -->
+             <br>
+             <div>
+                <span class="material-symbols-outlined">person</span>
+                <span id="nombreJugador" class="nombreJugador">Jugador: </span>
+            </div>
         </article> <!-- Fin tablero -->
+         <!-- Área para mostrar estadísticas -->
         <article id="estadisticas">
             
         </article>
     </main> <!-- Fin app -->
+    <!-- Scripts para la lógica del juego -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Recupera el nombre del jugador del almacenamiento local
+            var nombreJugador = localStorage.getItem("1");
+            if (nombreJugador) {
+                // Muestra el nombre del jugador en el elemento HTML
+                
+                document.getElementById("nombreJugador").textContent = "Jugador: " + nombreJugador;
+            }
+            
+        });
+    </script>
 
     <!-- link script -->
     <script src="JS/script.js"></script>
