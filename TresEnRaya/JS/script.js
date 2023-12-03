@@ -1,5 +1,7 @@
-let tableroVisible = false;
 
+// Controla la visibilidad del tablero y las estadísticas
+let tableroVisible = false;
+// Configuración inicial cuando se carga el documento
 document.addEventListener('DOMContentLoaded', function () {
     // tablero
     const tablero = document.getElementById('tablero');
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// casillas
+// Definición de las casillas del tablero
 var c1 = document.getElementById("1");
 var c2 = document.getElementById("2");
 var c3 = document.getElementById("3");
@@ -34,7 +36,7 @@ var c7 = document.getElementById("7");
 var c8 = document.getElementById("8");
 var c9 = document.getElementById("9");
 
-// marcar casillas 
+// Función para marcar una casilla seleccionada por el jugador
 function marcarCasilla(casilla){
     var celdas = casilla.querySelector('span');
     
@@ -49,7 +51,7 @@ function marcarCasilla(casilla){
     }
 }
 
-// marcar IA
+// Función para la jugada de la IA (ordenador)
 function marcaRobotin() {
     var celdas = document.querySelectorAll('span');
     var celdasNoMarcadas = [];
@@ -69,7 +71,7 @@ function marcaRobotin() {
     }
 }
 
-// comprobar ganador
+// Función para comprobar si hay un ganador
 function comprobarGanador() {
     const combinacionesGanadoras = [
         [c1, c2, c3],
@@ -82,57 +84,72 @@ function comprobarGanador() {
         [c7, c5, c3]
     ];
 
+    // Recuperar el alias del jugador
+    var nombreJugador = localStorage.getItem("1") || "Jugador";
+
     for (const combinacion of combinacionesGanadoras) {
         const [casilla1, casilla2, casilla3] = combinacion;
 
-        if (
-            casilla1.textContent === "X" && casilla2.textContent === "X" && casilla3.textContent === "X"
-        ) {
-            alert("El jugador gana");
-            var nombre = localStorage.getItem("1");
-            var Id = obtenerUltimoId();
-            var nuevoId = Id + 1;
-            var fechaActual = obtenerFechaActual();
-
-            localStorage.setItem(nuevoId.toString(), JSON.stringify({
-                nombre: nombre,
-                fecha: fechaActual,
-                puntos: 3
-            }));
-                var cantidadDatos = localStorage.length;
-                var limiteMaximo = 27;
-
-                if (cantidadDatos >= limiteMaximo) {
-                    eliminarElementosAntiguos(cantidadDatos - limiteMaximo + 1);
-                }
+        if (casilla1.textContent === "X" && casilla2.textContent === "X" && casilla3.textContent === "X") {
+            alert("¡Ganaste, " + nombreJugador + "!");
+            guardarPartida(nombreJugador, 3);
             vaciarCampos();
             return;
-        } else if (
-            casilla1.textContent === "O" && casilla2.textContent === "O" && casilla3.textContent === "O"
-        ) {
-            alert("El ordenador gana");
-            var nombre = "PC";
-            var Id = obtenerUltimoId();
-            var nuevoId = Id + 1;
-            var fechaActual = obtenerFechaActual();
-
-            localStorage.setItem(nuevoId.toString(), JSON.stringify({
-                nombre: nombre,
-                fecha: fechaActual,
-                puntos: 0
-            }));
-                var cantidadDatos = localStorage.length;
-                var limiteMaximo = 27;
-
-                if (cantidadDatos >= limiteMaximo) {
-                    eliminarElementosAntiguos(cantidadDatos - limiteMaximo - 1);
-                }
+        } else if (casilla1.textContent === "O" && casilla2.textContent === "O" && casilla3.textContent === "O") {
+            alert("El ordenador gana. ¡Inténtalo de nuevo, " + nombreJugador + "!");
+            guardarPartida("PC", 0);
             vaciarCampos();
             return;
         }
     }
-    empate();
+
+    // Verificar empate
+    if (empate()) {
+        alert("Hubo un empate, " + nombreJugador + ".");
+        guardarPartida(nombreJugador, 1);
+        vaciarCampos();
+    }
 }
+
+// Función para comprobar si hay un empate
+function empate() {
+    var celdas = document.querySelectorAll('.casilla span');
+    var celdasNoMarcadas = [];
+
+    celdas.forEach(function(celda) {
+        if (celda.textContent === "") {
+            celdasNoMarcadas.push(celda);
+        }
+    });
+
+    return celdasNoMarcadas.length === 0;
+}
+// Función para guardar la partida
+function guardarPartida(nombre, puntos) {
+    var Id = obtenerUltimoId() + 1;
+    var fechaActual = obtenerFechaActual();
+
+    localStorage.setItem(Id.toString(), JSON.stringify({
+        nombre: nombre,
+        fecha: fechaActual,
+        puntos: puntos
+    }));
+
+    var cantidadDatos = localStorage.length;
+    var limiteMaximo = 25;
+
+    if (cantidadDatos > limiteMaximo) {
+        eliminarElementosAntiguos(cantidadDatos - limiteMaximo);
+    }
+}
+// Función para vaciar campos
+function vaciarCampos(){
+    var celdas = document.querySelectorAll('.casilla span');
+    celdas.forEach(function(celda) {
+        celda.textContent = "";
+    });
+}
+
 function empate() {
     var celdas = document.querySelectorAll('.casilla span');
     var celdasNoMarcadas = [];
@@ -186,37 +203,44 @@ $(document).ready(function() {
 
 //Muestra las estadisticas de las ultimas 25 partidas
 function verEstadisticas() {
-    const todasLasClaves = Object.keys(localStorage);
     const estadisticas = document.getElementById('estadisticas');
-  
     estadisticas.innerHTML = '';
-  
-    const elementos = todasLasClaves
-      .filter(clave => clave !== '1')
-      .map(clave => JSON.parse(localStorage.getItem(clave)) || {});
-  
+
+    const todasLasClaves = Object.keys(localStorage).filter(clave => clave !== '1');
+
+    // Verificar si hay estadísticas para mostrar
+    if (todasLasClaves.length === 0) {
+        estadisticas.innerHTML = '<p>No hay partidas jugadas aún.</p>';
+        return;
+    }
+
+    // Si hay datos, procesarlos y mostrarlos
+    const elementos = todasLasClaves.map(clave => JSON.parse(localStorage.getItem(clave)) || {});
+
+    // Ordenar por fecha y puntos
     elementos.sort((a, b) => {
-      const fechaA = new Date(a.fecha);
-      const fechaB = new Date(b.fecha);
-  
-      if (fechaA > fechaB) return 1;
-      if (fechaA < fechaB) return -1;
-  
-      return a.puntos - b.puntos;
+        const fechaA = new Date(a.fecha);
+        const fechaB = new Date(b.fecha);
+
+        if (fechaA > fechaB) return -1;
+        if (fechaA < fechaB) return 1;
+
+        return b.puntos - a.puntos; // Ordenar descendente por puntos
     });
-  
+
+    // Mostrar las estadísticas
     elementos.forEach(elementoLocalStorage => {
-      const divElement = document.createElement('div');
-      divElement.innerHTML = `
-        <p>Ganador: ${elementoLocalStorage.nombre}</p>
-        <p>fecha: ${elementoLocalStorage.fecha}</p>
-        <p>puntos: ${elementoLocalStorage.puntos}</p>
-        <hr>
-      `;
-  
-      estadisticas.appendChild(divElement);
+        const divElement = document.createElement('div');
+        divElement.innerHTML = `
+            <p><strong>Ganador:</strong> ${elementoLocalStorage.nombre}</p>
+            <p><strong>Fecha:</strong> ${elementoLocalStorage.fecha}</p>
+            <p><strong>Puntos:</strong> ${elementoLocalStorage.puntos}</p>
+            <hr>
+        `;
+
+        estadisticas.appendChild(divElement);
     });
-  }
+}
 
 // Obtener el ultimo id del localStorage
 function obtenerUltimoId() {
