@@ -55,3 +55,11 @@ button:hover {
     margin-top: 15px;
     color: #333;
 }
+.material-symbols-outlined {
+    font-size: 20px; /* Ajusta el tamaño del icono */
+    vertical-align: middle; /* Alinea verticalmente con el texto */
+    vertical-align: middle; /* Alinea verticalmente el icono con el texto */
+    margin-right: 100px; 
+    margin-top: 0px;
+}
+
