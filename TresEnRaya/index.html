@@ -1,45 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+     <!-- Metadatos y enlaces a hojas de estilo -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/formulario.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>TRES EN RAYA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 </head>
 <body>
-
+    <!-- Contenido principal -->
     <main>
         <section>
+            <!-- Formulario para ingresar el apodo del jugador -->
             <h1>Formulario</h1> 
             <form id="formulario">
                 <label for="apodo">Introduce tu apodo:</label> <br>
-                <input type="text" id="apodo" name="apodo" required> <br>
-            
-                <button type="button" onclick="comprobarCampos()">Enviar</button>
+                <input type="text" id="apodo" name="apodo" required>
+                <p id="errorMensaje" class="errorMensaje"></p>
+                <button type="button" id="enviarBtn">Enviar</button>
             </form>
             <p id="mensaje"></p>
         </section>
         
     </main>
-
+    <!-- Scripts para la lógica de validación del formulario -->
     <script>
         function comprobarCampos() {
-        var apodo = document.getElementById("apodo").value;
-        var mensaje = document.getElementById("mensaje");
+            var apodo = document.getElementById("apodo").value;
+            var errorMensaje = document.getElementById("errorMensaje");
+            var mensaje = document.getElementById("mensaje");
 
-        if (apodo === "") {
-            mensaje.innerHTML = "Rellene el campo";
-        } else if (/\d/.test(apodo)) {
-            mensaje.innerHTML = "No se permiten numeros en el apodo";
-        } else {
-            localStorage.setItem("1", apodo);
-            mensaje.innerHTML = "Bienvenido, " + apodo;
-            setTimeout(function () {
-                window.location.href = "juego.html";
-            }, 500);
+            // Restablece los mensajes de error en cada intento
+            errorMensaje.textContent = "";
+            mensaje.textContent = "";
+
+            if (apodo === "") {
+                errorMensaje.textContent = "El campo de apodo no puede estar vacío.";
+            } else if (/\d/.test(apodo)) {
+                errorMensaje.textContent = "El apodo no puede contener números.";
+            } else {
+                localStorage.setItem("1", apodo);
+                mensaje.textContent = "Bienvenido, " + apodo;
+                setTimeout(function () {
+                    window.location.href = "juego.html";
+                }, 500);
+            }
         }
-    }
+      
+        // Agregar un manejador de eventos para el botón "Enviar"
+        document.getElementById("enviarBtn").addEventListener("click", comprobarCampos);
+
+        // Capturar el evento 'submit' del formulario
+        document.getElementById("formulario").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevenir el envío predeterminado del formulario
+            comprobarCampos();
+        });
     </script>
 </body>
 </html>
